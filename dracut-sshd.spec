@@ -29,6 +29,7 @@ root filesystem and remote access to the Dracut emergency shell
 %install
 mkdir -p %{buildroot}/usr/lib/dracut/modules.d
 cp -r 46sshd %{buildroot}/usr/lib/dracut/modules.d/
+cp -r 99sshd-shadow-fixup %{buildroot}/usr/lib/dracut/modules.d/
 
 %files
 %dir /usr/lib/dracut/modules.d/46sshd/
@@ -36,6 +37,7 @@ cp -r 46sshd %{buildroot}/usr/lib/dracut/modules.d/
 /usr/lib/dracut/modules.d/46sshd/sshd.service
 /usr/lib/dracut/modules.d/46sshd/motd
 /usr/lib/dracut/modules.d/46sshd/profile
+/usr/lib/dracut/modules.d/99sshd-shadow-fixup/module-setup.sh
 %config(noreplace) /usr/lib/dracut/modules.d/46sshd/sshd_config
 %doc README.md
 %doc example/20-wired.network
