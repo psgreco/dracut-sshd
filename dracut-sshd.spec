@@ -4,7 +4,7 @@ Name:       {{{ git_dir_name }}}
 # the 'lead' parameter, anyways
 # cf. https://pagure.io/rpkg-util/issue/21#comment-601077
 #Version:    {{{ git_dir_version }}}
-Version:    0.6.5
+Version:    0.6.6
 Release:    1%{?dist}
 Summary:    Provide SSH access to initramfs early user space
 URL:        https://github.com/gsauthof/dracut-sshd
@@ -63,6 +63,9 @@ cp -r 99sshd-networkmanager %{buildroot}/usr/lib/dracut/modules.d/
 /usr/lib/dracut/modules.d/99sshd-networkmanager/module-setup.sh
 
 %changelog
+* Wed Jun 14 2023 Warren Togami <wtogami@gmail.com> - 0.6.6-1
+- 99sshd-shadow-fixup enables ssh pubkey login with disabled password as intended
+
 * Sat May 27 2023 Georg Sauthoff <mail@gms.tf> - 0.6.5-1
 - eliminate tmpfiles and fix Debian/Ubuntu support
 
