@@ -4,7 +4,7 @@ Name:       {{{ git_dir_name }}}
 # the 'lead' parameter, anyways
 # cf. https://pagure.io/rpkg-util/issue/21#comment-601077
 #Version:    {{{ git_dir_version }}}
-Version:    0.6.6
+Version:    0.6.7
 Release:    1%{?dist}
 Summary:    Provide SSH access to initramfs early user space
 URL:        https://github.com/gsauthof/dracut-sshd
@@ -63,6 +63,13 @@ cp -r 99sshd-networkmanager %{buildroot}/usr/lib/dracut/modules.d/
 /usr/lib/dracut/modules.d/99sshd-networkmanager/module-setup.sh
 
 %changelog
+* Wed Jun 14 2023 Warren Togami <wtogami@gmail.com> - 0.6.7-1
+- dracut-sshd-networkmanager subpackage
+  99sshd-networkmanager adjusts nm-initrd.service to run for dracut-sshd.
+- If config is lacking, auto DHCP ethernet in the same manner as rootfs NetworkManager.
+- Clean network teardown prior to switchroot avoids conflicts and gives OS full control.
+- Settings could be overriden by copying ifcfg or nmconnection settings into the initrd.
+
 * Wed Jun 14 2023 Warren Togami <wtogami@gmail.com> - 0.6.6-1
 - 99sshd-shadow-fixup enables ssh pubkey login with disabled password as intended
 
