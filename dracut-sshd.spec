@@ -20,6 +20,21 @@ initramfs. It allows for remote unlocking of a fully encrypted
 root filesystem and remote access to the Dracut emergency shell
 (i.e. early userspace).
 
+%package networkmanager
+Summary:    Enables NetworkManager for sshd during initramfs
+Requires:   dracut-sshd
+Requires:   NetworkManager
+
+%description networkmanager
+This module enables dracut network-manager settings for dracut-sshd.
+
+- If no configuration is provided it uses DHCP to bring up ethernet
+  in the same manner as rootfs NetworkManager.
+- Cleanly tears down networking prior to switchroot to avoid conflicts
+  thereby allowing the OS full control of networking config.
+- Network settings could be overriden by copying ifcfg or nmconnection
+  settings into the initrd. e.g. static IP's
+
 %prep
 {{{ git_dir_setup_macro }}}
 
@@ -30,6 +45,7 @@ root filesystem and remote access to the Dracut emergency shell
 mkdir -p %{buildroot}/usr/lib/dracut/modules.d
 cp -r 46sshd %{buildroot}/usr/lib/dracut/modules.d/
 cp -r 99sshd-shadow-fixup %{buildroot}/usr/lib/dracut/modules.d/
+cp -r 99sshd-networkmanager %{buildroot}/usr/lib/dracut/modules.d/
 
 %files
 %dir /usr/lib/dracut/modules.d/46sshd/
@@ -42,6 +58,9 @@ cp -r 99sshd-shadow-fixup %{buildroot}/usr/lib/dracut/modules.d/
 %doc README.md
 %doc example/20-wired.network
 %doc example/90-networkd.conf
+
+%files networkmanager
+/usr/lib/dracut/modules.d/99sshd-networkmanager/module-setup.sh
 
 %changelog
 * Sat May 27 2023 Georg Sauthoff <mail@gms.tf> - 0.6.5-1
