@@ -31,6 +31,7 @@ mkdir -p %{buildroot}/usr/lib/dracut/modules.d
 cp -r 46sshd %{buildroot}/usr/lib/dracut/modules.d/
 
 %files
+%dir /usr/lib/dracut/modules.d/46sshd/
 /usr/lib/dracut/modules.d/46sshd/module-setup.sh
 /usr/lib/dracut/modules.d/46sshd/sshd.service
 /usr/lib/dracut/modules.d/46sshd/motd
